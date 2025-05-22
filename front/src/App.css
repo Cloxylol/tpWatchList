@@ -1,52 +1,115 @@
+/* ============ GLOBAL ============ */
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fbeaff;
-  display: flex;
-  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdecef; /* fond rose pastel */
+  color: #333;
 }
 
-.App {
+/* ============ FORM CONTAINER ============ */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-card {
+  background-color: #fff6f8;
+  padding: 3%;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 30%;
+  text-align: center;
+    display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background-color: #fff6f8;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 40%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.card h2, .card h1 {
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+input, select, textarea {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button {
+  background-color: #ffb6c1;
   color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #ff91a4;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ============ NAVBAR ============ */
+.navbar {
+  background-color: #fdf6f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #f0cdda;
+  padding: 0.8rem 2rem;
 }
 
-.annonces-container {
+.navbar-logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #7a2e4d;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-buttons button {
+  background-color: #ffd6e0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-buttons button:hover {
+  background-color: #ffc3cf;
+}
+
+/* ============ ANIME CARDS ============ */
+.anime-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -54,20 +117,27 @@ body {
   justify-content: center;
 }
 
-.annonce-card {
+.anime-card {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 10px;
   width: 250px;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
 }
 
-.annonce-card h3 {
-  margin-top: 0;
-  color: #7e11bd;}
+.anime-card:hover {
+  transform: translateY(-5px);
+}
 
-.annonce-card button {
+.anime-card h3 {
+  margin-top: 0;
+  color: #7e11bd;
+}
+
+.anime-card button {
   margin-right: 5px;
   margin-top: 10px;
 }
+

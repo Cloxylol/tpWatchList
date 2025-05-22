@@ -1,28 +1,53 @@
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import "../../App.css";
 
-const Navbar = () => {
-    const token = localStorage.getItem("token");
+
+export default function Navbar() {
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
-    if (!token) return null;
+    const isValidToken = token && token !== "undefined" && token !== "null";
+    let prenom = "";
 
-const user = jwtDecode(token);
+    try {
+        if (isValidToken) {
+            const decoded = jwtDecode(token);
+            prenom = decoded.prenom || decoded.name || "";
+        }
+    } catch (err) {
+        console.warn("Token invalide, suppression...");
+        localStorage.removeItem("token");
+    }
 
     const handleLogout = () => {
         localStorage.removeItem("token");
-        navigate("/");
+        navigate("/login");
     };
 
     return (
-        <nav>
-            <div>
-                <Link to="/home"> Accueil</Link>
-                <button onClick={handleLogout}>Logout</button>
-                <p>Bonjour {user.prenom} {user.nom} !</p>
+        <nav className="navbar">
+
+            <div className="navbar-left">
+                <span className="navbar-logo">TpWatchList</span>
+            </div>
+
+            <div className="navbar-buttons">
+
+                {isValidToken ? (
+                    <>
+                        <button onClick={() => navigate("/home")}>Accueil</button>
+                        <button onClick={handleLogout}>Logout</button>
+                        <span className="navbar-welcome">Bonjour {prenom} !</span>
+                    </>
+                ) : (
+                    <>
+                        <button onClick={() => navigate("/")}>Login</button>
+                        <button onClick={() => navigate("/register")}>Register</button>
+                    </>
+                )}
             </div>
         </nav>
     );
-};
-
-export default Navbar;
+}
