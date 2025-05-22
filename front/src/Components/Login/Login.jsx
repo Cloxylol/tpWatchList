@@ -24,9 +24,11 @@ const Login = () => {
       });
   };
 
-  return (
-    <div>
-      <h1>Login</h1>
+return (
+  <div className="page-container">
+    <div className="login-card">
+      <h2>Connexion</h2>
+      
       <input
         type="text"
         placeholder="Email"
@@ -35,14 +37,16 @@ const Login = () => {
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Mot de passe"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={() => navigate("/register")}>Créer un compte</button>
+      <button onClick={handleLogin}>Connexion</button>
     </div>
-  );
+  </div>
+);
+
+
 };
 
 export default Login;

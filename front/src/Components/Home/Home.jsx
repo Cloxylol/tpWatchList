@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const Home = () => {
+
+  const navigate = useNavigate();
   const [animes, setanimes] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editAnimeId, setEditAnimeId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [newAnime, setNewAnime] = useState({
-    title: "",
-    description: "",
-    category: "",
-  });
 
   useEffect(() => {
     fetchanimes();
@@ -27,38 +24,6 @@ const Home = () => {
       console.error("Error fetching animes:", error);
     }
   };
-
-  const handleEdit = (anime) => {
-    setIsEditing(true);
-    setEditAnimeId(anime._id);
-    setNewAnime({
-      title: anime.title,
-      description: anime.description,
-      category: anime.category,
-    });
-  };
-
-  const updateAnime = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      await axios.put(
-        `http://localhost:8080/animes/update/${editAnimeId}`,
-        newAnime,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsEditing(false);
-      setEditAnimeId(null);
-      setNewAnime({ title: "", description: "", category: "" });
-      fetchanimes();
-    } catch (error) {
-      console.error("Erreur update :", error);
-    }
-  };
-
 
   const deleteAnime = async (id) => {
     const token = localStorage.getItem("token");
@@ -82,39 +47,14 @@ const Home = () => {
   };
 
 
-  const createAnime = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("You need to be logged in to create a Anime.");
-      return;
-    }
-
-    console.log(newAnime);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/animes/create",
-        newAnime,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert("Anime created successfully");
-      setanimes([...animes, response.data]); // 
-      setNewAnime({ title: "", description: "", category: "" });
-    } catch (error) {
-      console.error("Error creating Anime:", error.response?.data || error.message);
-    }
-  };
-
   return (
     <div>
       <h1>Welcome to AnimeList App</h1>
 
-
+      
       <h2>Liste de tes Animes</h2>
+      <button onClick={() => navigate("/creation")}>Enregistrer une série</button>
+
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
@@ -134,51 +74,13 @@ const Home = () => {
               <p>{anime.description}</p>
               <p>Catégorie : {anime.category}</p>
               <button onClick={() => deleteAnime(anime._id)}>Supprimer</button>
-              <button onClick={() => handleEdit(anime)}>Modifier</button>
               <Link to={`/anime/${anime._id}`}>
                 <button>Voir l'anime</button>
               </Link>
             </div>
           ))}
       </div>
-      <div>
-        <h2>Enregistrer un nouvel animé</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          value={newAnime.title}
-          onChange={(e) =>
-            setNewAnime({ ...newAnime, title: e.target.value })
-          }
-        />
-
-        <input
-          type="text"
-          placeholder="Description"
-          value={newAnime.description}
-          onChange={(e) =>
-            setNewAnime({ ...newAnime, description: e.target.value })
-          }
-        />
-
-        <select
-          value={newAnime.category}
-          onChange={(e) =>
-            setNewAnime({ ...newAnime, category: e.target.value })
-          }
-        >
-          <option value="">Catégorie :</option>
-          <option value="Immobilier">Immobilier</option>
-          <option value="Emploi">Meuble</option>
-          <option value="Informatique">Informatique</option>
-          <option value="Loisir">Loisir</option>
-        </select>
-
-
-        <button onClick={isEditing ? updateAnime : createAnime}>
-          {isEditing ? "Mettre à jour" : "Créer l'anime"}
-        </button>
-      </div>
+      
     </div>
   );
 };
