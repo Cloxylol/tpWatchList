@@ -1,0 +1,15 @@
+# Ignore les node_modules des deux parties
+app/node_modules/
+front/node_modules/
+
+# Ignore les fichiers sensibles
+.env
+app/.env
+front/.env
+
+# Dossiers de build ou temporaires
+dist/
+build/
+
+# Système
+.DS_Store
