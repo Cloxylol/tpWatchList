@@ -1,5 +1,5 @@
-import axios, { AxiosHeaders } from "axios";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -9,75 +9,60 @@ const Register = () => {
   const [nom, setNom] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(prenom);
-  }, [prenom, nom, email]);
-
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!email || !password || !prenom || !nom) {
-      alert("Please fill in all fields");
+      alert("Merci de remplir tous les champs");
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:8080/users/register",
-        {
-          email,
-          password,
-          prenom,
-          nom,
-        }
-      );
-      alert("Registration successful");
+      const response = await axios.post("http://localhost:8080/users/register", {
+        email,
+        password,
+        prenom,
+        nom,
+      });
+      alert("Inscription réussie !");
       console.log(response.data);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Erreur pendant l'inscription :", error);
+      alert("Une erreur est survenue. Vérifie les champs ou réessaie plus tard.");
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleRegister}>
-        <div>
-          <label htmlFor="prenom">Prenom:</label>
+    <div className="page-container">
+      <div className="login-card">
+        <h2>Créer un compte</h2>
+        <form onSubmit={handleRegister}>
           <input
             type="text"
-            id="prenom"
+            placeholder="Prénom"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="nom">Nom:</label>
           <input
             type="text"
-            id="nom"
+            placeholder="Nom"
             value={nom}
             onChange={(e) => setNom(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
+            placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <button type="submit">Register</button>
-      </form>
+          <button type="submit">Inscription</button>
+        </form>
+      </div>
     </div>
   );
 };
