@@ -22,6 +22,23 @@ const animeSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  progress: {
+    currentEpisode: {
+      type: Number,
+      default: 0,
+    },
+    totalEpisodes: {
+      type: Number,
+    },
+  },
+  rating: {
+    type: Number, // ex: note sur 10
+    min: 0,
+    max: 10,
+  },
+  review: {
+    type: String, // avis texte
+  },
 });
 
-module.exports = mongoose.model("anime", animeSchema);
+module.exports = mongoose.model("Anime", animeSchema);
