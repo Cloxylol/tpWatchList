@@ -7,6 +7,12 @@ const createAnime = async (req, res) => {
       description: req.body.description,
       category: req.body.category,
       author: req.user._id,
+      progress: {
+        currentEpisode: req.body.currentEpisode || 0,
+        totalEpisodes: req.body.totalEpisodes,
+      },
+      rating: req.body.rating,
+      review: req.body.review,
     });
 
     await newAnime.save();
@@ -19,7 +25,7 @@ const createAnime = async (req, res) => {
 
 const getAllAnimes = async (req, res) => {
   try {
-    const animes = await AnimeModel.find({}).populate("author", "prenom nom");
+    const animes = await AnimeModel.find({ author: req.user._id }).populate("author", "prenom nom");
     res.status(200).send(animes);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -38,17 +44,13 @@ const getAnimeById = async (req, res) => {
   }
 };
 
-
 const deleteAnime = async (req, res) => {
   try {
-    console.log("Suppression anime ID :", req.params.id);
     const deletedAnime = await AnimeModel.findByIdAndDelete(req.params.id);
-
     if (!deletedAnime) {
       return res.status(404).send({ error: "Anime not found" });
     }
-
-    res.status(200).send({ message: "Anime supprimée", anime: deletedAnime });
+    res.status(200).send({ message: "Anime supprimé", anime: deletedAnime });
   } catch (error) {
     console.error("Erreur suppression anime :", error.message);
     res.status(400).send({ error: error.message });
@@ -59,7 +61,38 @@ const updateAnime = async (req, res) => {
   try {
     const updatedAnime = await AnimeModel.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      {
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category,
+        progress: {
+          currentEpisode: req.body.currentEpisode,
+          totalEpisodes: req.body.totalEpisodes,
+        },
+        rating: req.body.rating,
+        review: req.body.review,
+      },
+      { new: true }
+    );
+
+    if (!updatedAnime) {
+      return res.status(404).send({ error: "Anime not found" });
+    }
+
+    res.status(200).send(updatedAnime);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+};
+
+// ✅ Nouvelle fonction ajoutée pour PATCH /:id/progress
+const updateProgress = async (req, res) => {
+  try {
+    const { currentEpisode } = req.body;
+
+    const updatedAnime = await AnimeModel.findByIdAndUpdate(
+      req.params.id,
+      { "progress.currentEpisode": currentEpisode },
       { new: true }
     );
 
@@ -78,5 +111,6 @@ module.exports = {
   getAllAnimes,
   deleteAnime,
   updateAnime,
-  getAnimeById, 
+  getAnimeById,
+  updateProgress
 };
