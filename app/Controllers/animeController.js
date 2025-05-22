@@ -106,11 +106,37 @@ const updateProgress = async (req, res) => {
   }
 };
 
+const searchAnimes = async (req, res) => {
+  try {
+    const { name, category, rating } = req.query;
+    const query = {};
+
+    if (name) {
+      query.name = { $regex: name, $options: "i" }; // recherche insensible à la casse
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
+    if (rating) {
+      query.rating = Number(rating); // attention : peut être égal strictement
+      // Ou pour >= un seuil : query.rating = { $gte: Number(rating) }
+    }
+
+    const results = await AnimeModel.find(query);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createAnime,
   getAllAnimes,
   deleteAnime,
   updateAnime,
   getAnimeById,
-  updateProgress
+  updateProgress,
+  searchAnimes
 };

@@ -53,4 +53,14 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+// Récupération de tous les utilisateurs (sans les mots de passe)
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+module.exports = { registerUser, loginUser, getUsers};
