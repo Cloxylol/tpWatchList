@@ -18,19 +18,16 @@ tpWatchList est une application web MERN permettant aux utilisateurs de gérer l
 - 🔎 **Filtrage et recherche d’animés**  
   Possibilité de filtrer les animés par catégorie, de faire une recherche par nom.
 
-- 🧑‍💻 **Dashboard utilisateur personnalisé**  
-  Chaque utilisateur dispose d’un espace personnel avec ses animés suivis, ses notes et ses préférences.
-
 - 📈 Suivi d'avancement épisode/saison (boutons ➕)
 
 ---
 
 ## 📁 Structure du projet
 
-tpWatchList/
-├── front/ # Frontend React
-│ ├── src/
-│ │ ├── Components/ # Composants (Navbar, Home, AnimeForm, etc.)
+tpWatchList
+├── front
+│ ├── src
+│ │ ├── Components
 │ │ └── App.js
 │ └── package.json
 ├── back/ # Backend Node.js + Express
