@@ -57,6 +57,27 @@ body {
   width: 100%;
   margin-top: 10px;
 }
+.input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.input-icon input {
+  width: 100%;
+  padding: 10px 10px 10px 40px; /* espace pour l'icône à gauche */
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.input-icon svg {
+  position: absolute;
+  left: 12px;
+  color: #aaa;
+  pointer-events: none;
+}
 
 .card {
   background-color: #ffeef1;
@@ -147,7 +168,6 @@ form textarea {
 }
 
 
-
 /* ============ ANIME CARDS ============ */
 .anime-list-container {
   margin-left: 20%;
@@ -228,7 +248,7 @@ form textarea {
   margin-top: 10px;
 }
 
-/* */
+/* ============ ANIME DETAILS ============ */
 .anime-detail {
   max-width: 800px;
   color: #2D3436;
