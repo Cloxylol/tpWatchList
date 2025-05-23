@@ -83,20 +83,20 @@ const AnimeDetail = () => {
 
                     <p>
                         <strong>Episode :</strong> {anime.progress.currentEpisode}
-                        <button onClick={() => updateField("currentEpisode")} style={{ marginLeft: "10px" }}>➕</button>
+                        <button className="btn-increment" onClick={() => updateField("currentEpisode")} style={{ marginLeft: "10px" }}>+</button>
                     </p>
 
                     <p>
                         <strong>Saison :</strong> {anime.progress.currentSeason}
-                        <button onClick={() => updateField("currentSeason")} style={{ marginLeft: "10px" }}>➕</button>
+                        <button className="btn-increment" onClick={() => updateField("currentSeason")} style={{ marginLeft: "10px" }}>+</button>
                     </p>
 
                     <p><strong>Carte créée par :</strong> {anime.author?.prenom} {anime.author?.nom}</p>
 
-                    <div >
-                        <button onClick={deleteAnime}>Supprimer</button>
+                    <div className="anime-info-btn">
+                        <button className="btn-primary" onClick={deleteAnime}>Supprimer</button>
                         <Link to={`/edit/${id}`}>
-                            <button>Modifier</button>
+                            <button className="btn-primary">Modifier</button>
                         </Link>
                     </div>
 
