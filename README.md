@@ -20,22 +20,6 @@ tpWatchList est une application web MERN permettant aux utilisateurs de gérer l
 
 - 📈 Suivi d'avancement épisode/saison (boutons ➕)
 
----
-
-## 📁 Structure du projet
-
-tpWatchList
-├── front
-│ ├── src
-│ │ ├── Components
-│ │ └── App.js
-│ └── package.json
-├── back/ # Backend Node.js + Express
-│ ├── Controllers/
-│ ├── Routes/
-│ ├── Models/
-│ └── server.js
-└── README.md
 
 
 ---
