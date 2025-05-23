@@ -7,7 +7,7 @@ const Creation = () => {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [currentEpisode, setCurrentEpisode] = useState(0);
-    const [totalEpisodes, setTotalEpisodes] = useState(0);
+    const [currentSeason, setCurrentSeason] = useState(0);
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
 
@@ -25,7 +25,7 @@ const Creation = () => {
                     category,
                     progress: {
                         currentEpisode,
-                        totalEpisodes,
+                        currentSeason,
                     },
                     rating,
                     review,
@@ -42,7 +42,7 @@ const Creation = () => {
                 setDescription("");
                 setCategory("");
                 setCurrentEpisode(0);
-                setTotalEpisodes(0);
+                setCurrentSeason(0);
                 setRating(0);
                 setReview("");
             })
@@ -66,15 +66,6 @@ const Creation = () => {
                         required
                     />
 
-                    <label>Description</label>
-                    <input
-                        type="text"
-                        placeholder="Résumé rapide de l'anime"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-
                     <label>Catégorie</label>
                     <select
                         value={category}
@@ -82,13 +73,18 @@ const Creation = () => {
                         required
                     >
                         <option value="">Choisir une catégorie</option>
-                        <option value="Action">Action</option>
+                        <option value="Shonen">Shonen</option>
+                        <option value="Shojo">Shojo</option>
+                        <option value="Seinen">Seinen</option>
+                        <option value="Mecha">Mecha</option>
+                        <option value="Horreur">Horreur</option>
                         <option value="Comédie">Comédie</option>
                         <option value="Drame">Drame</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Romance">Romance</option>
-                        <option value="Horreur">Horreur</option>
-                        <option value="Slice of Life">Slice of Life</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Mystère">Mystère</option>
+                        <option value="Science-fiction">Science-fiction</option>
                     </select>
 
                     <label>Épisode actuel</label>
@@ -104,8 +100,8 @@ const Creation = () => {
                     <input
                         type="number"
                         placeholder="Ex : 12"
-                        value={totalEpisodes}
-                        onChange={(e) => setTotalEpisodes(parseInt(e.target.value))}
+                        value={currentSeason}
+                        onChange={(e) => setCurrentSeason(parseInt(e.target.value))}
                         min="1"
                     />
 

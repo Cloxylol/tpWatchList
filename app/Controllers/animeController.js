@@ -4,12 +4,11 @@ const createAnime = async (req, res) => {
   try {
     const newAnime = new AnimeModel({
       title: req.body.title,
-      description: req.body.description,
       category: req.body.category,
       author: req.user._id,
       progress: {
         currentEpisode: req.body.currentEpisode || 0,
-        totalEpisodes: req.body.totalEpisodes,
+        currentSeason: req.body.currentSeason,
       },
       rating: req.body.rating,
       review: req.body.review,
@@ -63,11 +62,10 @@ const updateAnime = async (req, res) => {
       req.params.id,
       {
         title: req.body.title,
-        description: req.body.description,
         category: req.body.category,
         progress: {
           currentEpisode: req.body.currentEpisode,
-          totalEpisodes: req.body.totalEpisodes,
+          currentSeason: req.body.currentSeason,
         },
         rating: req.body.rating,
         review: req.body.review,

@@ -5,10 +5,7 @@ const animeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
+
   category: {
     type: String,
     required: true,
@@ -27,12 +24,12 @@ const animeSchema = new mongoose.Schema({
       type: Number,
       default: 0,
     },
-    totalEpisodes: {
+    currentSeason: {
       type: Number,
     },
   },
   rating: {
-    type: Number, // ex: note sur 10
+    type: Number, 
     min: 0,
     max: 10,
   },
