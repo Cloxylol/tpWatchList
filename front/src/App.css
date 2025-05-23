@@ -12,7 +12,7 @@ body {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 12px;
+  padding: 10px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -169,13 +169,21 @@ form textarea {
 
 
 /* ============ ANIME CARDS ============ */
+.btn-ajouter {
+  display: block;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
 .anime-list-container {
   margin-left: 20%;
   margin-right: 20%;
 }
+
 .anime-list-nav{
   width: 100%;
-  text-align: right;
+  display: flex;
+  justify-content: right;
+  gap: 15px;
 }
 .anime-list-nav button {
   margin-right: 10px;
@@ -189,9 +197,27 @@ form textarea {
   padding: 20px 0px 20px 0px;
   justify-content: center;
 }
+.input-icon {
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.anime-search {
+  height: 25px;
+  padding-left: 30px;
+  font-size: 13px;
+  border-radius: 6px;
+  background-color: #FEF0F3;
+  border: 1px solid #FFD0D7 !important;
+  box-sizing: border-box; 
+}
+
 .anime-filter{
+  width: 200px;
+  height: 25px;
   border-radius: 8px;
   background-color: #FEF0F3;
+  color: #2D3436;
   padding: 5px;
   border: none;
   border: 1px solid #FFD0D7;
@@ -230,7 +256,7 @@ form textarea {
 
 .anime-right {
   display: flex;
-  flex-direction: column;
+  align-self: flex-end;
   padding: 20px 20px 20px 0px;
 }
 
@@ -290,4 +316,17 @@ form textarea {
   gap: 12px;
   font-size: 1rem;
   line-height: 1.5;
+}
+.btn-increment {
+  background-color: #f78fb3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;      
+  height: 20px; 
+  font-size: 14px;
+  cursor: pointer;
+}
+.anime-info-btn button{
+  margin-left: 10px;
 }
