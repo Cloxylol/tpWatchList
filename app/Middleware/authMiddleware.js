@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../Models/userModel"); 
+const User = require("../Models/userModel");
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -10,15 +10,20 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); 
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(decoded._id); 
+    const user = await User.findById(decoded._id);
     if (!user) {
       return res.status(401).send({ error: "Utilisateur introuvable" });
     }
 
-    req.user = user; 
-    console.log("Utilisateur authentifié :", req.user); 
+    req.user = {
+      _id: user._id,
+      prenom: user.prenom,
+      nom: user.nom,
+      email: user.email,
+    };
+    console.log("Utilisateur authentifié :", req.user);
     next();
   } catch (error) {
     console.error("Erreur auth :", error.message);
