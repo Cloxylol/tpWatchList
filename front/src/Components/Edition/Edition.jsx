@@ -26,7 +26,7 @@ const Edition = () => {
     }, [id, token]);
 
     const handleUpdate = (data) => {
-        axios.put(`http://localhost:8080/animes/${id}`, {
+        axios.put(`http://localhost:8080/animes/update/${id}`, {
             title: data.title,
             description: data.description,
             category: data.category,
