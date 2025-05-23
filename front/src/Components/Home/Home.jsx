@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
-
   const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
+
   const [animes, setanimes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const animesPerPage = 4;
 
   useEffect(() => {
     fetchanimes();
@@ -34,7 +33,7 @@ const Home = () => {
   const deleteAnime = async (id) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You need to be logged in to delete a Anime.");
+      alert("You need to be logged in to delete an Anime.");
       return;
     }
 
@@ -44,20 +43,27 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       alert("Anime deleted successfully");
-      fetchanimes(); // refresh la liste après suppression
+      fetchanimes();
     } catch (error) {
       console.error("Error deleting Anime:", error.response?.data || error.message);
     }
   };
 
+  const filteredAnimes = animes
+    .filter((a) => selectedCategory === "" || a.category === selectedCategory)
+    .filter((a) => a.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  const indexOfLast = currentPage * animesPerPage;
+  const indexOfFirst = indexOfLast - animesPerPage;
+  const currentAnimes = filteredAnimes.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(filteredAnimes.length / animesPerPage);
 
   return (
     <div className="anime-list-container">
       <h1>Liste de tes Animes</h1>
       <div className="anime-list-nav">
-        <button className="btn-primary " onClick={() => navigate("/creation")}>+ Ajouter</button>
+        <button className="btn-primary" onClick={() => navigate("/creation")}>+ Ajouter</button>
 
         <select
           value={selectedCategory}
@@ -77,8 +83,8 @@ const Home = () => {
           <option value="Sport">Sport</option>
           <option value="Mystère">Mystère</option>
           <option value="Science-fiction">Science-fiction</option>
-
         </select>
+
         <input
           type="text"
           placeholder="Recherche"
@@ -87,45 +93,48 @@ const Home = () => {
           className="anime-search"
         />
       </div>
+
       <div className="animes-container">
-        {animes
-          .filter((a) => selectedCategory === "" || a.category === selectedCategory)
-          .filter((a) =>
-            (selectedCategory === "" || a.category === selectedCategory) &&
-            (a.title.toLowerCase().includes(searchTerm.toLowerCase()))
-          )
-          .map((anime) => (
-            <div className="anime-card" key={anime._id}>
-              {/* Partie gauche : image */}
-              <div className="anime-left">
-                <img
-                  src="https://fr.web.img5.acsta.net/pictures/19/08/01/09/52/4803203.jpg"
-                  alt={anime.title}
-                  className="anime-image"
-                />
-              </div>
-
-              {/* Partie centrale : contenu texte */}
-              <div className="anime-center">
-                <h3>{anime.title}</h3>
-                <p>{anime.description}</p>
-                <p>Catégorie : {anime.category}</p>
-              </div>
-
-              {/* Partie droite : boutons */}
-              <div className="anime-right">
-                <button className="btn-primary" onClick={() => deleteAnime(anime._id)}>Supprimer</button>
-                <Link to={`/edit/${anime._id}`}>
-                  <button className="btn-primary">Modifier</button>
-                </Link>
-                <Link to={`/anime/${anime._id}`}>
-                  <button className="btn-primary">Voir l'anime</button>
-                </Link>
-              </div>
+        {currentAnimes.map((anime) => (
+          <div className="anime-card" key={anime._id}>
+            <div className="anime-left">
+              <img
+                src="https://fr.web.img5.acsta.net/pictures/19/08/01/09/52/4803203.jpg"
+                alt={anime.title}
+                className="anime-image"
+              />
             </div>
-          ))}
+
+            <div className="anime-center">
+              <h3>{anime.title}</h3>
+              <p>{anime.description}</p>
+              <p>Catégorie : {anime.category}</p>
+            </div>
+
+            <div className="anime-right">
+              <button className="btn-primary" onClick={() => deleteAnime(anime._id)}>Supprimer</button>
+              <Link to={`/edit/${anime._id}`}>
+                <button className="btn-primary">Modifier</button>
+              </Link>
+              <Link to={`/anime/${anime._id}`}>
+                <button className="btn-primary">Voir l'anime</button>
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
 
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            className={`btn-primary pagination-btn ${currentPage === i + 1 ? "active" : ""}`}
+            onClick={() => setCurrentPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
