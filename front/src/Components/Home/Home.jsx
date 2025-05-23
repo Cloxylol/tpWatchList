@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
 const Home = () => {
@@ -55,10 +57,21 @@ const Home = () => {
 
   return (
     <div className="anime-list-container">
-      <h1>Liste de tes Animes</h1>
+      <div className="anime-list-header">
+        <h1>Liste de tes Animes</h1>
+        <button className="btn-primary btn-ajouter" onClick={() => navigate("/creation")}>+ Ajouter</button>
+      </div>
       <div className="anime-list-nav">
-        <button className="btn-primary " onClick={() => navigate("/creation")}>+ Ajouter</button>
-
+        <div className="input-icon">
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <input
+            type="text"
+            placeholder="Recherche"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="anime-search"
+          />
+        </div>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -79,13 +92,6 @@ const Home = () => {
           <option value="Science-fiction">Science-fiction</option>
 
         </select>
-        <input
-          type="text"
-          placeholder="Recherche"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="anime-search"
-        />
       </div>
       <div className="animes-container">
         {animes

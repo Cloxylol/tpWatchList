@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,19 +31,24 @@ return (
   <div className="page-container">
     <div className="login-card">
       <h2>Connexion</h2>
-      
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <div className="input-icon">
+          <FontAwesomeIcon icon={faEnvelope} />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="input-icon">
+        <FontAwesomeIcon icon={faLock} />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
       <button className="btn-primary" onClick={handleLogin}>Connexion</button>
     </div>
   </div>
