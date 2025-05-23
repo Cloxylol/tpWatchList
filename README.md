@@ -16,40 +16,71 @@ tpWatchList est une application web MERN permettant aux utilisateurs de gérer l
   Les utilisateurs peuvent noter les épisodes visionnés et laisser des commentaires.
 
 - 🔎 **Filtrage et recherche d’animés**  
-  Possibilité de filtrer les animés par catégorie, de faire une recherche par nom ou autre critère.
+  Possibilité de filtrer les animés par catégorie, de faire une recherche par nom.
 
 - 🧑‍💻 **Dashboard utilisateur personnalisé**  
   Chaque utilisateur dispose d’un espace personnel avec ses animés suivis, ses notes et ses préférences.
+
+- 📈 Suivi d'avancement épisode/saison (boutons ➕)
+
+---
+
+## 📁 Structure du projet
+
+tpWatchList/
+├── front/ # Frontend React
+│ ├── src/
+│ │ ├── Components/ # Composants (Navbar, Home, AnimeForm, etc.)
+│ │ └── App.js
+│ └── package.json
+├── back/ # Backend Node.js + Express
+│ ├── Controllers/
+│ ├── Routes/
+│ ├── Models/
+│ └── server.js
+└── README.md
+
 
 ---
 
 ## 🛠️ Stack technique
 
-- **MongoDB** : base de données NoSQL
-- **Express.js** : framework backend
-- **React** : interface utilisateur côté client
-- **Node.js** : environnement serveur
+Stack MERN : 
+React 
+Node.js 
+MongoDB 
+
+JWT pour l'authentification
+Axios pour les requêtes API
 
 ---
 
 ## ▶️ Lancer le projet
 
-**Lancer le backend :**
+## 🚀 Lancer le projet en local
 
-```bash
-cd app
-npm install
-node app.js
-```
+### 🖥 Côté serveur (backend)
 
-**Lancer le frontend :**
-
-```bash
-cd ../front
+cd back
 npm install
 npm start
-```
+Le serveur démarre sur http://localhost:8080
+
+## 🌐 Côté client (frontend)
+
+cd front
+npm install
+npm start
+L'application sera disponible sur http://localhost:3000
 
 ---
+
+👩‍💻 Développé par
+
+Mariyam AGJIL
+Ferdaouss CHAKROUN
+Florian DARDY
+Bouchra MEHDAOUI
+Cloé PETETIN 
 
 
