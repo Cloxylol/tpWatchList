@@ -68,8 +68,6 @@ const Home = () => {
         <button className="btn-primary btn-ajouter" onClick={() => navigate("/creation")}>+ Ajouter</button>
       </div>
       <div className="anime-list-nav">
-        <button className="btn-primary" onClick={() => navigate("/creation")}>+ Ajouter</button>
-
         <div className="input-icon">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input

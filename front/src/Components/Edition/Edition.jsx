@@ -30,16 +30,12 @@ const Edition = () => {
             title: data.title,
             description: data.description,
             category: data.category,
-            progress: {
-                currentEpisode: data.currentEpisode,
-                currentSeason: data.currentSeason
-            },
+            currentEpisode: data.currentEpisode,
+            currentSeason: data.currentSeason,
             rating: data.rating,
             review: data.review
         }, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` }
         })
             .then(() => alert("Anime modifié avec succès !"))
             .catch((err) => alert("Erreur lors de la modification : " + err.message));
