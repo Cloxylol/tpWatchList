@@ -6,17 +6,20 @@ tpWatchList est une application web MERN permettant aux utilisateurs de gérer l
 
 ## 🚀 Fonctionnalités principales
 
-### 👤 Authentification
-- Inscription (`/register`)
-- Connexion (`/login`)
-- Déconnexion
+- 🔐 **Authentification sécurisée**  
+  Les utilisateurs peuvent s'inscrire, se connecter et se déconnecter en toute sécurité.
 
-### 📺 Gestion des Animes
-- Afficher tous les animes disponibles
-- Consulter les détails d’un anime
-- Filtrer les animes par catégorie
-- Ajouter un anime à sa liste personnelle
-- Supprimer un anime de sa liste
+- ➕ **Ajout, édition et suppression d'animés**  
+  Chaque utilisateur peut gérer sa propre liste d’animés : ajouter, modifier ou supprimer des fiches.
+
+- ⭐ **Notation et avis par épisode**  
+  Les utilisateurs peuvent noter les épisodes visionnés et laisser des commentaires.
+
+- 🔎 **Filtrage et recherche d’animés**  
+  Possibilité de filtrer les animés par catégorie, de faire une recherche par nom ou autre critère.
+
+- 🧑‍💻 **Dashboard utilisateur personnalisé**  
+  Chaque utilisateur dispose d’un espace personnel avec ses animés suivis, ses notes et ses préférences.
 
 ---
 
