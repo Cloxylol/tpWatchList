@@ -24,7 +24,7 @@ tpWatchList est une application web MERN permettant aux utilisateurs de gérer l
 
 - **MongoDB** : base de données NoSQL
 - **Express.js** : framework backend
-- **React.js** : interface utilisateur côté client
+- **React** : interface utilisateur côté client
 - **Node.js** : environnement serveur
 
 ---
