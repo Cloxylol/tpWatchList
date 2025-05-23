@@ -18,7 +18,7 @@ const Creation = () => {
 
         axios
             .post(
-                "http://localhost:8080/animes",
+                "http://localhost:8080/animes/create",
                 {
                     title,
                     description,
@@ -128,7 +128,7 @@ const Creation = () => {
                         rows={4}
                     />
 
-                    <button type="submit">Créer l'anime</button>
+                    <button type="submit">Ajouter</button>
                 </form>
             </div>
         </div>

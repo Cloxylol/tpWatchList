@@ -41,7 +41,7 @@ return (
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Connexion</button>
+      <button className="btn-primary" onClick={handleLogin}>Connexion</button>
     </div>
   </div>
 );

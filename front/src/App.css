@@ -3,13 +3,25 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fdecef; /* fond rose pastel */
+  background-color: #FFF5F7; /* fond rose pastel */
   color: #333;
 }
 
+.btn-primary {
+  background-color: #f78fb3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #e6679c
+}
 /* ============ FORM CONTAINER ============ */
 .page-container {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,114 +29,189 @@ body {
 }
 
 .login-card {
-  background-color: #fff6f8;
-  padding: 3%;
+  background-color: #ffeef1;
+  padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  max-width: 30%;
+  box-shadow: 0px 0px 4px 1px #FFD0D7;
   text-align: center;
-    display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  width: 300px;
 }
 
-.card {
-  background-color: #fff6f8;
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 40%;
-  text-align: center;
-}
-
-
-.card h2, .card h1 {
-  margin-bottom: 1.5rem;
+.login-card h2 {
+  margin-bottom: 20px;
   color: #333;
 }
 
-
-
-input, select, textarea {
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+.login-card input {
   width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #FEE4E8;
+  border-radius: 8px;
+  background-color: white;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
-button {
-  background-color: #ffb6c1;
-  color: white;
+.login-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.card {
+  background-color: #ffeef1;
+  border: 1px solid #FFD0D7;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 800px;
+}
+
+.card h2 {
+  color: #2D3436;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.card form label {
   font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  padding: 0.8rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
 }
-
-button:hover {
-  background-color: #ff91a4;
+.card form input,
+form select,
+form textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+}
+.card form button {
+  background-color: #f78fb3;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 12px;
+  width: 100px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 /* ============ NAVBAR ============ */
 .navbar {
-  background-color: #fdf6f0;
+  background-color: #FFD0D7;
+  color: #2D3436;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid #f0cdda;
-  padding: 0.8rem 2rem;
+  padding: 0rem 2rem;
 }
 
 .navbar-logo {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #7a2e4d;
+  height: 100px;
+    transform: scale(1.2); /* zoom de 20% */
+  transform-origin: left center;
 }
 
 .navbar-buttons {
   display: flex;
   gap: 10px;
 }
-
 .navbar-buttons button {
-  background-color: #ffd6e0;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    background: none;
+    border: none;
+    color: #2D3436;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 10px;
+    transition: color 0.3s;
 }
 
 .navbar-buttons button:hover {
-  background-color: #ffc3cf;
+    color: #f78fb3;
+    text-decoration: underline;
 }
+
+
 
 /* ============ ANIME CARDS ============ */
-.anime-container {
+.anime-list-container {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.anime-list-nav{
+  width: 100%;
+  text-align: right;
+}
+.anime-list-nav button {
+  margin-right: 10px;
+}
+.animes-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0px 20px 0px;
   justify-content: center;
 }
-
+.anime-filter{
+  border-radius: 8px;
+  background-color: #FEF0F3;
+  padding: 5px;
+  border: none;
+  border: 1px solid #FFD0D7;
+}
 .anime-card {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  width: 250px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #FEF0F3;
+  border-radius: 25px;
+  box-shadow: 0px 0px 4px 1px #FFD0D7;
+  gap: 20px;
+}
+
+.anime-left {
+  width: 150px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+}
+
+.anime-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+.anime-center {
+  flex: 1;
+  display: flex;
+  padding: 20px 0px 20px 0px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.anime-right {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 20px 0px;
 }
 
 .anime-card:hover {
@@ -133,7 +220,7 @@ button:hover {
 
 .anime-card h3 {
   margin-top: 0;
-  color: #7e11bd;
+  color: #2D3436;
 }
 
 .anime-card button {
@@ -141,3 +228,46 @@ button:hover {
   margin-top: 10px;
 }
 
+/* */
+.anime-detail {
+  max-width: 800px;
+  color: #2D3436;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffeef1;
+  border-radius: 16px;
+  box-shadow: 0px 0px 4px 1px #FFD0D7;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2d3436;
+}
+.anime-title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #2D3436;
+}
+
+.anime-detail-content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.anime-detail-image {
+  width: 250px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.anime-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "../../App.css";
+import logo from '../../assets/logo.png';
 
 
 export default function Navbar() {
@@ -30,7 +31,7 @@ export default function Navbar() {
         <nav className="navbar">
 
             <div className="navbar-left">
-                <span className="navbar-logo">TpWatchList</span>
+            <img src={logo} alt="TpWatchList Logo" className="navbar-logo" />
             </div>
 
             <div className="navbar-buttons">
@@ -39,7 +40,7 @@ export default function Navbar() {
                     <>
                         <button onClick={() => navigate("/home")}>Accueil</button>
                         <button onClick={handleLogout}>Logout</button>
-                        <span className="navbar-welcome">Bonjour {prenom} !</span>
+                        <span className="navbar-welcome">{prenom}</span>
                     </>
                 ) : (
                     <>
