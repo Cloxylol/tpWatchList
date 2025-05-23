@@ -52,17 +52,17 @@ const Home = () => {
 
 
   return (
-    <div>
-      <h1>Welcome to AnimeList App</h1>
-
-      
-      <h2>Liste de tes Animes</h2>
-      <button onClick={() => navigate("/creation")}>Enregistrer une série</button>
+    <div className="anime-list-container">   
+      <h1>Liste de tes Animes</h1>
+      <div className="anime-list-nav">
+      <button className="btn-primary "onClick={() => navigate("/creation")}>+ Ajouter</button>
 
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
+        className="anime-filter"
       >
+
                         <option value="Shonen">Shonen</option>
                         <option value="Shojo">Shojo</option>
                         <option value="Seinen">Seinen</option>
@@ -75,19 +75,37 @@ const Home = () => {
                         <option value="Sport">Sport</option>
                         <option value="Mystère">Mystère</option>
                         <option value="Science-fiction">Science-fiction</option>
+
       </select>
+      </div>
       <div className="animes-container">
         {animes
           .filter((a) => selectedCategory === "" || a.category === selectedCategory)
           .map((anime) => (
             <div className="anime-card" key={anime._id}>
-              <h3>{anime.title}</h3>
-              <p>{anime.description}</p>
-              <p>Catégorie : {anime.category}</p>
-              <button onClick={() => deleteAnime(anime._id)}>Supprimer</button>
-              <Link to={`/anime/${anime._id}`}>
-                <button>Voir l'anime</button>
-              </Link>
+              {/* Partie gauche : image */}
+              <div className="anime-left">
+                <img
+                  src="https://fr.web.img5.acsta.net/pictures/19/08/01/09/52/4803203.jpg"
+                  alt={anime.title}
+                  className="anime-image"
+                />
+              </div>
+
+              {/* Partie centrale : contenu texte */}
+              <div className="anime-center">
+                <h3>{anime.title}</h3>
+                <p>{anime.description}</p>
+                <p>Catégorie : {anime.category}</p>
+              </div>
+
+              {/* Partie droite : boutons */}
+              <div className="anime-right">
+                <button className="btn-primary" onClick={() => deleteAnime(anime._id)}>Supprimer</button>
+                <Link to={`/anime/${anime._id}`}>
+                  <button className="btn-primary">Voir l'anime</button>
+                </Link>
+              </div>
             </div>
           ))}
       </div>

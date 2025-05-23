@@ -124,7 +124,7 @@ const Creation = () => {
                         rows={4}
                     />
 
-                    <button type="submit">Créer l'anime</button>
+                    <button type="submit">Ajouter</button>
                 </form>
             </div>
         </div>
