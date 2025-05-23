@@ -6,6 +6,7 @@ import Home from "./Components/Home/Home";
 import AnimeDetail from "./Components/AnimeDetail/AnimeDetail";
 import Navbar from "./Components/Navbar/Navbar";
 import Creation from "./Components/Creation/Creation";
+import Edition from './Components/Edition/Edition';
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/anime/:id" element={<AnimeDetail />} />
         <Route path="/creation" element={<Creation />} />
+        <Route path="/edit/:id" element={<Edition />} />
       </Routes>
     </BrowserRouter>
   );

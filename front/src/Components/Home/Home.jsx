@@ -11,22 +11,24 @@ const Home = () => {
   const navigate = useNavigate();
   const [animes, setanimes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   useEffect(() => {
     fetchanimes();
   }, []);
 
   const fetchanimes = async () => {
-  try {
-    const response = await axios.get("http://localhost:8080/animes/getAllAnimes", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    setanimes(response.data);
-  } catch (error) {
-    console.error("Error fetching animes:", error);
-  }
+    try {
+      const response = await axios.get("http://localhost:8080/animes/getAllAnimes", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setanimes(response.data);
+    } catch (error) {
+      console.error("Error fetching animes:", error);
+    }
   };
 
   const deleteAnime = async (id) => {
@@ -52,35 +54,46 @@ const Home = () => {
 
 
   return (
-    <div className="anime-list-container">   
+    <div className="anime-list-container">
       <h1>Liste de tes Animes</h1>
       <div className="anime-list-nav">
-      <button className="btn-primary "onClick={() => navigate("/creation")}>+ Ajouter</button>
+        <button className="btn-primary " onClick={() => navigate("/creation")}>+ Ajouter</button>
 
-      <select
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        className="anime-filter"
-      >
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="anime-filter"
+        >
+          <option value="">Choisir une catégorie</option>
+          <option value="Shonen">Shonen</option>
+          <option value="Shojo">Shojo</option>
+          <option value="Seinen">Seinen</option>
+          <option value="Mecha">Mecha</option>
+          <option value="Horreur">Horreur</option>
+          <option value="Comédie">Comédie</option>
+          <option value="Drame">Drame</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Romance">Romance</option>
+          <option value="Sport">Sport</option>
+          <option value="Mystère">Mystère</option>
+          <option value="Science-fiction">Science-fiction</option>
 
-                        <option value="Shonen">Shonen</option>
-                        <option value="Shojo">Shojo</option>
-                        <option value="Seinen">Seinen</option>
-                        <option value="Mecha">Mecha</option>
-                        <option value="Horreur">Horreur</option>
-                        <option value="Comédie">Comédie</option>
-                        <option value="Drame">Drame</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Sport">Sport</option>
-                        <option value="Mystère">Mystère</option>
-                        <option value="Science-fiction">Science-fiction</option>
-
-      </select>
+        </select>
+        <input
+          type="text"
+          placeholder="Recherche"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="anime-search"
+        />
       </div>
       <div className="animes-container">
         {animes
           .filter((a) => selectedCategory === "" || a.category === selectedCategory)
+          .filter((a) =>
+            (selectedCategory === "" || a.category === selectedCategory) &&
+            (a.title.toLowerCase().includes(searchTerm.toLowerCase()))
+          )
           .map((anime) => (
             <div className="anime-card" key={anime._id}>
               {/* Partie gauche : image */}
@@ -102,6 +115,9 @@ const Home = () => {
               {/* Partie droite : boutons */}
               <div className="anime-right">
                 <button className="btn-primary" onClick={() => deleteAnime(anime._id)}>Supprimer</button>
+                <Link to={`/edit/${anime._id}`}>
+                  <button className="btn-primary">Modifier</button>
+                </Link>
                 <Link to={`/anime/${anime._id}`}>
                   <button className="btn-primary">Voir l'anime</button>
                 </Link>
@@ -109,7 +125,7 @@ const Home = () => {
             </div>
           ))}
       </div>
-      
+
     </div>
   );
 };

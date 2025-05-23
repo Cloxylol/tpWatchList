@@ -83,26 +83,43 @@ const updateAnime = async (req, res) => {
   }
 };
 
-// ✅ Nouvelle fonction ajoutée pour PATCH /:id/progress
 const updateProgress = async (req, res) => {
   try {
-    const { currentEpisode } = req.body;
+    console.log("PATCH reçu :", req.body);
+
+    const updates = {};
+
+    if (typeof req.body.currentEpisode !== "undefined") {
+      updates["progress.currentEpisode"] = req.body.currentEpisode;
+    }
+
+    if (typeof req.body.currentSeason !== "undefined") {
+      updates["progress.currentSeason"] = req.body.currentSeason;
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).send({ error: "Aucune donnée de progression fournie." });
+    }
 
     const updatedAnime = await AnimeModel.findByIdAndUpdate(
       req.params.id,
-      { "progress.currentEpisode": currentEpisode },
+      { $set: updates },
       { new: true }
     );
 
     if (!updatedAnime) {
-      return res.status(404).send({ error: "Anime not found" });
+      return res.status(404).send({ error: "Anime non trouvé." });
     }
 
     res.status(200).send(updatedAnime);
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    console.error("Erreur PATCH /progress :", error);
+    res.status(500).send({ error: error.message });
   }
 };
+
+
+
 
 const searchAnimes = async (req, res) => {
   try {
